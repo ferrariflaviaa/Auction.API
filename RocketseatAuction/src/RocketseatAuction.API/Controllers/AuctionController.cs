@@ -13,10 +13,9 @@ public class AuctionController : RocketseatAuctionBaseController
     [ProducesResponseType(typeof(Auction), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
 
-    public IActionResult GetCurrentAuction()
+    public IActionResult GetCurrentAuction([FromServices] GetCurrentAuctionUseCase useCase)
     {
-        var UseCase = new GetCurrentAuctionUseCase();
-        var result = UseCase.Execute();
+        var result = useCase.Execute();
         if(result is null)
         {
             return NotFound();
